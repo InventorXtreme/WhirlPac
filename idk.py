@@ -85,6 +85,8 @@ def run():
     selrun = selrundata + ".py"
     try:
         exec(open(selrun).read())
+    except EOFError:
+        messagebox.showerror(title="Error", message ="Terminal apps can not be ran with a gui")
     except:
         messagebox.showerror(title="Error", message = "File not found. Be sure it is downloaded")
 def update():
