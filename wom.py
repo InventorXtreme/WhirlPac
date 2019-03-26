@@ -1,5 +1,5 @@
 import sys
-#why
+#whyyy
 import getopt
 import urllib
 from urllib import request
@@ -25,7 +25,7 @@ def install(idx):
     except:
         print("error")
 def main(argv):
-    
+
     try:
         opts, args = getopt.getopt(argv,"i:d:",["ifile=","dfile="])
         modei = 0
@@ -50,8 +50,8 @@ def main(argv):
         getinfo(infofile)
     if moded == 1:
         install(downfile)
-        
-		
-	   
+
+
+
 if __name__ == "__main__":
     main(sys.argv[1:])
