@@ -8,6 +8,7 @@ from urllib import request
 from tkinter import messagebox
 global box
 global pacmanlist
+import os
 pacmanlist = []
 def create_widgets():
     global search_var
@@ -15,7 +16,7 @@ def create_widgets():
     search_var.trace("w", update_list)
     entry = Entry(root, textvariable=search_var, width=13)
     entry.pack(side=BOTTOM)
-    
+
     # Function for updating the list/doing the search.
     # It needs to be called here to populate the listbox.
     update_list()
@@ -44,8 +45,8 @@ def reload():
             box.insert(ladd, pacmanlist[i])
     except:
         oof= 1
-        
-        
+
+
 
 root = Tk()
 root.title("WhirlPac")
@@ -112,12 +113,30 @@ def getinfo():
     except:
         messagebox.showerror("Error","Error downloading info. You are probably not connected to the internet")
 
+def installrun():
+    install()
+    run()
+def remove():
+    sel = box.curselection()
+    sel = int(sel[0])
+    idx = pacmanlist[sel]
+    idx2 = idx + ".py"
+
+    if os.path.exists(idx2):
+        os.remove(idx2)
+    else:
+        messagebox.showerror("Error","Program has not been installed or is already uninstalled.")
+
+def removi():
+    prompt = messagebox.askquestion("Uninstall", "Are you sure you want to uninstall?", icon = "warning")
+    if prompt == "yes":
+        remove()
 scrollbar = ttk.Scrollbar(boxboi)
 scrollbar.pack(side=RIGHT,fill = Y)
 scrollbar.config(command=box.yview)
 go = ttk.Button(root, text ="Download", command=install)
 go.pack(in_=top,side=LEFT)
-upbut = ttk.Button(root, text="Update",command=update)
+upbut = ttk.Button(root, text="Refresh",command=update)
 runbut = ttk.Button(root, text="Run", command=run)
 runbut.pack(in_=top,side=LEFT)
 upbut.pack(in_=top,side=LEFT)
@@ -127,5 +146,21 @@ info = ttk.Button(root,text="Info",command=getinfo)
 info.pack(in_=top,side=LEFT)
 create_widgets()
 boxboi.pack(side=BOTTOM)
+bar = Menu(root)
+file = Menu(bar)
+runmen = Menu(bar)
+file.add_command(label = "Install", command = install)
+file.add_command(label = "Uninstall", command = removi)
+file.add_command(label = "Get Info", command = getinfo)
+file.add_command(label = "Refresh", command = update)
+
+runmen.add_command(label = "Run", command = run)
+runmen.add_command(label = "Install then run", command = installrun)
+bar.add_cascade(label = "Package", menu=file)
+bar.add_cascade(label = "Run", menu = runmen)
+
+root.config(menu =bar)
+
+
 
 root.mainloop()
