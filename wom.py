@@ -1,4 +1,5 @@
 import sys
+#why
 import getopt
 import urllib
 from urllib import request
