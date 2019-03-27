@@ -1,4 +1,5 @@
-##t
+#Made by inventorxtreme
+#2019
 from tkinter import *
 from tkinter import ttk
 import tkinter
