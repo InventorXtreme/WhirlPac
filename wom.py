@@ -27,7 +27,7 @@ def install(idx):
 def main(argv):
 
     try:
-        opts, args = getopt.getopt(argv,"i:d:",["ifile=","dfile="])
+        opts, args = getopt.getopt(argv,"i:d:h",["ifile=","dfile=","help="])
         modei = 0
         moded = 0
     except getopt.GetoptError:
