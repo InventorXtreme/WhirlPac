@@ -35,6 +35,7 @@ def update_list(*args):
     except:
         oof = 1
 def reload():
+
     global pacmanlist
     try:
         dirfile = open("pacmandir.txt","rb")
@@ -46,6 +47,7 @@ def reload():
             box.insert(ladd, pacmanlist[i])
     except:
         oof= 1
+
 
 
 
@@ -88,7 +90,7 @@ def run():
     try:
         exec(open(selrun).read())
     except EOFError:
-        messagebox.showerror(title="Error", message ="Terminal apps can not be ran with a gui")
+        messagebox.showerror(title="Error", message ="Terminal apps can not be ran without a terminal")
     except:
         messagebox.showerror(title="Error", message = "File not found. Be sure it is downloaded")
 def update():
