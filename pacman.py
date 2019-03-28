@@ -1,5 +1,5 @@
 #Made by inventorxtreme
-#2019
+#March 2019
 from tkinter import *
 from tkinter import ttk
 import tkinter
@@ -157,7 +157,7 @@ file.add_command(label = "Refresh", command = update)
 
 runmen.add_command(label = "Run", command = run)
 runmen.add_command(label = "Install then run", command = installrun)
-bar.add_cascade(label = "Package", menu=file)
+bar.add_cascade(label = "WhirlPac", menu=file)
 bar.add_cascade(label = "Run", menu = runmen)
 
 root.config(menu =bar)
