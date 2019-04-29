@@ -7,6 +7,11 @@ import pickle
 import urllib
 from urllib import request
 from tkinter import messagebox
+from tkinter import simpledialog
+#from tkinter import filedialog
+#from tkinter import messagebox
+#from tkinter.filedialog import asksaveasfile
+#from tkinter.filedialog import askopenfile
 global box
 global pacmanlist
 import os
@@ -48,8 +53,20 @@ def reload():
     except:
         oof= 1
 
-
-
+def srun():
+    global srunimp
+    sel = box.curselection()
+    print(sel)
+    sel = int(sel[0])
+    idx = pacmanlist[sel]
+    #sname=simpledialog.askstring("Special Run", "Enter Program Name")
+    srunimp = __import__(idx)
+    sfunc=simpledialog.askstring("Special Run", "Enter Function Name")
+    try:
+        scall = getattr(srunimp, sfunc)
+        scall()
+    except AttributeError:
+        messagebox.showerror("Function Not Found", "Function not found in module")
 
 root = Tk()
 root.title("WhirlPac")
@@ -150,12 +167,13 @@ info.pack(in_=top,side=LEFT)
 create_widgets()
 boxboi.pack(side=BOTTOM)
 bar = Menu(root)
-file = Menu(bar)
-runmen = Menu(bar)
+file = Menu(bar, tearoff=0)
+runmen = Menu(bar, tearoff=0)
 file.add_command(label = "Install", command = install)
 file.add_command(label = "Uninstall", command = removi)
 file.add_command(label = "Get Info", command = getinfo)
 file.add_command(label = "Refresh", command = update)
+file.add_command(label = "Special Run", command = srun)
 
 runmen.add_command(label = "Run", command = run)
 runmen.add_command(label = "Install then run", command = installrun)
